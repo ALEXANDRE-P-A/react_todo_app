@@ -1,0 +1,412 @@
+.oswald-mainfont {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  z-index: 1;
+}
+
+.App-logo {
+  height: 60vmin;
+  pointer-events: none;
+  opacity: .1;
+  position: fixed;
+  top: 30%;
+  bottom: auto;
+}
+
+/* ---  Menu(starts here) --- */
+.menubar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  border-top: .5px solid #00d8ff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 25px;
+  background-color: #222;
+  z-index: 3;
+}
+
+.menuBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  color: #00d8ff;
+}
+
+.menuBtn:disabled {
+  opacity: .2;
+}
+
+.menuIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.menuText {
+  font-size: 9px;
+}
+/* ---  Menu(ends here) --- */
+
+/* --- Main content(starts here) --- */
+.container {
+  width: 100%;
+  background-color: #282c34;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  padding-bottom: 75px;
+}
+
+.listName {
+  position: fixed;
+  width: 95%;
+  height: 30px;
+  padding: 0 2.5%;
+  font-weight: bold;
+  text-align: center;
+  background-color: #282c34;
+  color: #00d8ff;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;  
+  -webkit-box-orient:vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.emptyCase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  width: 48%;
+  background-color: transparent;
+  border: 2.5px solid #00d8ff;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+}
+
+.completed {
+  opacity: .2;
+}
+
+.contentBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px auto;
+}
+
+.itemText {
+  font-size: 16px;
+  color: #00d8ff;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;  
+  -webkit-box-orient: vertical;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* --- Main content(ends here) --- */
+
+/* --- Item detail Modal(starts here) --- */
+.modal-slide-down {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;    
+  background-color: rgba(34, 34, 34, .9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+
+  animation-name: slide-down;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.modal-slide-up {
+  animation-name: slide-up;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.modalItemContainer {
+  width: 100%;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 5;
+}
+
+.modalItemTitle {
+  font-size: 24px;
+  color: #00d8ff;
+  font-weight: bold;
+}
+
+.modalInput {
+  height: 40px;
+  width: 300px;
+  margin-top: 6px;
+  border: 1px solid #00d8ff;
+  border-radius: 0;
+  background-color: #222;
+  text-align: center;
+  color: #00d8ff;
+  font-size: 16px;
+  padding: 0;
+}
+
+select { 
+  text-align-last: center; 
+}
+
+option { 
+  direction: rtl; 
+}
+
+.modalTextArea {
+  height: 100px;
+  padding: 0;
+  padding-top: 10px;
+  text-align: center;
+}
+
+.modalButtons {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  padding: 0;
+}
+
+.modalBtn {
+  width: 75px;
+  height: 40px;
+  background-color: #00d8ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  color: #222;
+  padding: 5px 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.modalBtnIcon {
+  width: 24px;
+  height: 24px;
+}
+/* --- Item detail Modal(ends here) --- */
+
+/* --- Switch List Modal(starts here) --- */
+.modal-slide-right {
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;    
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+
+  animation-name: slide-right;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.switchListModalContent {
+  width: 80%;
+  height: 100%;
+  background-color: rgba(34, 34, 34, .9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #00d8ff;  
+}
+
+.modal-slide-left {
+  animation-name: slide-left;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.listTitle {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;  
+  -webkit-box-orient:vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.switchModalBtnArea {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 18px 0 52px;
+}
+
+.switchModalBtn {
+  background-color: transparent;
+  color: #00d8ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+}
+
+.switchModalBtn:disabled {
+  opacity: .2;
+}
+
+.switchModalBtnIcon {
+  width: 52px;
+  height: 52px;
+}
+
+.addListInputArea {
+  width: calc(100% - 30px);
+  height: 35px;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  opacity: 1; 
+  pointer-events: all;
+  transition: .5s;
+}
+
+.addListInputArea.hidden {
+   opacity: 0; 
+   pointer-events: none;
+}
+
+.addListBtn {
+  width: 20%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #00d8ff
+}
+
+.listNonSelectedOpacity {
+  opacity: .4;
+}
+
+.listSelectedOpacity {
+  opacity: 1;
+}
+/* --- Switch List Modal(ends here) --- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
