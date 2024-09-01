@@ -17,6 +17,8 @@ import { useCurrentList } from "../context/CurrentListContext";
 
 export const AddItemModal = _ => {
 
+  console.log("AddItemModal render ...");
+
   const [ title, setTitle ] = useState("");
   const [ content, setContent ] = useState("");
 

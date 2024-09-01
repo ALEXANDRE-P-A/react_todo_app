@@ -6,6 +6,8 @@ import { MdDelete } from "react-icons/md";
 import { TiArrowBack } from "react-icons/ti";
 import { MdOutlineRedo } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
+import { MdDone } from "react-icons/md";
+
 
 import { complete, editTodo, deleteTodo } from "../store/modules/todos";
 import { useDispatch } from "react-redux";
@@ -82,11 +84,18 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
           border: "none"
         }}
       >
+        { !todo.flag && <span><MdDone style={{ width: "32px", height: "32px", color: "00d8ff" }}/></span> }
         <form className="contentBox" style={{ flexDirection: "column" }} onSubmit={ editHandler }>
           {
             edit === false ?
               (
-                <span className="itemText" style={{ width: "auto", fontSize: "24px" }}>{ title }</span>
+                <span 
+                  className="itemText" 
+                  style={{ 
+                    width: "auto", 
+                    fontSize: "24px" 
+                  }}
+                  >{ title }</span>
               ) :
               (
                 <input 
@@ -98,6 +107,7 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
                 />
               )
           }
+          <span className="itemText" style={{ width: "auto", fontSize: "15px", fontWeight: "200" }}><strong>Added in { todo.list } list</strong></span>
           <span className="itemText" style={{ width: "auto", fontSize: "15px", fontWeight: "200" }}>created { todo.created }</span>
           {
             todo.updated && (

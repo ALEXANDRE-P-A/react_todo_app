@@ -2,7 +2,7 @@ import "../App.css";
 import logo from '../logo.svg';
 
 import { MdAdd } from "react-icons/md";
-import { MdFormatListBulletedAdd } from "react-icons/md";
+import { MdPlaylistAdd  } from "react-icons/md";
 
 import { useSelector } from "react-redux";
 
@@ -11,43 +11,23 @@ import { Todo } from "./Todo.js";
 import { useAddItemModal, useSwitchListModal } from "../context/ModalContext.js";
 import { useCurrentList } from "../context/CurrentListContext.js";
 
-const InsideContent = ({ title, items, setAddItemModel, setSwitchListModal }) => {
+const InsideContent = ({ title, listsLength, items, setAddItemModel, setSwitchListModal }) => {
 
   if(title.length === 0){
     return (
       <div className="emptyCase">
-        <button
-          type="button"
-          className="menuBtn"
-          onClick={ _ => setSwitchListModal(true) }
-        >
-          <MdFormatListBulletedAdd  
-            className="menuIcon" 
-            style={{
-              width: "36px",
-              height: "36px"
-            }}
-          />
-          <span className="menuText">select or add list</span>
+        <button type="button" className="menuBtn empty-case-btn" onClick={ _ => setSwitchListModal(true) }>
+          <MdPlaylistAdd className="menuIcon empty-case-btn-icon" />
+          <span className="menuText empty-case-btn-text lists">lists({ listsLength || "0" })</span>
         </button>
       </div>
     )
   } else if(items.length === 0){
     return (
       <div className="emptyCase">
-        <button
-          type="button"
-          className="menuBtn"
-          onClick={ _ => setAddItemModel(true) }
-        >
-          <MdAdd  
-            className="menuIcon" 
-            style={{
-              width: "36px",
-              height: "36px"
-            }}
-          />
-          <span className="menuText">add item</span>
+        <button type="button" className="menuBtn empty-case-btn" onClick={ _ => setAddItemModel(true) }>
+          <MdAdd className="menuIcon empty-case-btn-icon" />
+          <span className="menuText empty-case-btn-text items">add item</span>
         </button>
       </div>
     )
@@ -60,14 +40,18 @@ const InsideContent = ({ title, items, setAddItemModel, setSwitchListModal }) =>
 
 export const Container = _ => {
 
+  console.log("Container render ...")
+
   const [ ,setAddItemModel ] = useAddItemModal();
   const [ ,setSwitchListModal ] = useSwitchListModal(false);
   const [ currentList ] = useCurrentList();
 
   let todos;
+  let listsLength;
   const lists = useSelector(state => state.todos.lists);
 
   for(let list of lists){
+    listsLength = lists.length;
     if(list.title === currentList){
       todos = list.items;
     }
@@ -78,6 +62,7 @@ export const Container = _ => {
       <img src={logo} className="App-logo" alt="logo" />
       <InsideContent 
         title={ currentList }
+        listsLength={ listsLength }
         items={ todos }
         setAddItemModel={ setAddItemModel }
         setSwitchListModal={ setSwitchListModal }

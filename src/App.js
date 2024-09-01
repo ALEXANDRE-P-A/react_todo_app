@@ -12,6 +12,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { ModalProvider } from './context/ModalContext.js';
 import { CurrentListProvider } from './context/CurrentListContext.js';
 import { SingleTodoProvider } from './context/SingleTodoContext.js';
+import { FilterTodoProvider } from './context/FilterTodoContext.js';
 
 const App = _ => {
 
@@ -22,10 +23,12 @@ const App = _ => {
           <ModalProvider>
             <CurrentListProvider>
               <SingleTodoProvider>
-                <ListTitle />
-                <Container />
-                <Menu />
-                <SlideWindow />
+                <FilterTodoProvider>
+                  <ListTitle />
+                  <Container />
+                  <Menu />
+                  <SlideWindow />
+                </FilterTodoProvider>
               </SingleTodoProvider>
             </CurrentListProvider>
           </ModalProvider>

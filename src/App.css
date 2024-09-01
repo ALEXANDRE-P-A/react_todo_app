@@ -10,6 +10,8 @@
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   z-index: 1;
+  scrollbar-color: #222 #00d8ff;
+  scrollbar-width: none;
 }
 
 .App-logo {
@@ -48,6 +50,11 @@
   color: #00d8ff;
 }
 
+.menuBtn-icon {
+  width: 18px;
+  height: 18px;
+}
+
 .menuBtn:disabled {
   opacity: .2;
 }
@@ -59,6 +66,14 @@
 
 .menuText {
   font-size: 9px;
+}
+
+.menuText.addNewListBtnText {
+  font-size: 12px;
+}
+
+.menuText.icon {
+  font-size: 6px;
 }
 /* ---  Menu(ends here) --- */
 
@@ -78,7 +93,7 @@
   padding-bottom: 75px;
 }
 
-.listName {
+.listHeader {
   position: fixed;
   width: 95%;
   height: 30px;
@@ -91,6 +106,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.listHeaderTitle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.listTitle {
+  width: 80%;
   display: -webkit-box;
   -webkit-line-clamp: 1;  
   -webkit-box-orient:vertical;
@@ -99,10 +126,62 @@
   word-break: break-all;
 }
 
+.icon-box {
+  width: 10%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00d8ff;
+}
+
+.icon-box.active {
+  background-color: #00d8ff;
+  color: #282c34
+}
+
+.filter-icon {
+  width: 80%;
+  height: 80%;
+}
+
 .emptyCase {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  bottom: 100px;
+  right: 10px;
+}
+
+.empty-case-btn {
+  background-color: #00d8ff;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.empty-case-btn-icon {
+  width: 70%;
+  height: 50%;
+  color: #222;
+}
+
+.empty-case-btn-text {
+  height: 20%;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+}
+
+.empty-case-btn-text.lists {
+  width: 60%;
+}
+
+.empty-case-btn-text.items {
+  width: 80%;
 }
 
 .item {
@@ -117,6 +196,32 @@
   padding: 3px;
 }
 
+.item.todo {
+  position: relative;
+}
+
+.check-simble {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.check-simble-icon {
+  width: 50%;
+  height: 50%;
+  color: #00d8ff;
+}
+
+.content-simble-icon {
+  color: #00d8ff;
+  width: 18px;
+  height: 18px;
+  margin-right: 3px;
+}
+
 .completed {
   opacity: .2;
 }
@@ -129,6 +234,16 @@
   margin: 5px auto;
 }
 
+.contentBox.todo {
+  flex-direction: column;
+}
+
+.todo-title {
+  width: 100%; 
+  display: flex;
+   align-items: center;
+}
+
 .itemText {
   font-size: 16px;
   color: #00d8ff;
@@ -139,6 +254,11 @@
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.itemText.created {
+  font-size: 10px;
+  font-weight: lighter;
 }
 /* --- Main content(ends here) --- */
 
@@ -193,6 +313,24 @@
   color: #00d8ff;
   font-size: 16px;
   padding: 0;
+}
+
+.modalInput.lists {
+  width: 78%;
+  height: 100%;
+}
+
+.modalInput.editing {
+  width: 80%;
+}
+
+.add-list-icon {
+  width: 36px; 
+  height: 36px;
+}
+
+.add-list-icon-text {
+  font-size: 1.2em;
 }
 
 select { 
@@ -276,6 +414,11 @@ option {
   animation-fill-mode: forwards;
 }
 
+.switch-list-window-blank-space {
+  width: 20%; 
+  height: 100%;
+}
+
 .listTitle {
   display: -webkit-box;
   -webkit-line-clamp: 1;  
@@ -290,6 +433,10 @@ option {
   display: flex;
   justify-content: space-around;
   margin: 18px 0 52px;
+}
+
+.switchModalBtnArea.editing {
+  width: 80%;
 }
 
 .switchModalBtn {
@@ -339,14 +486,204 @@ option {
   color: #00d8ff
 }
 
-.listNonSelectedOpacity {
+.single-list {
+  width: 97.5%;
+  height: 40px;
+  margin: 17.8px 0;
+  padding: 0 1.25%;
+  display: flex;
+  justify-content: space-between;
+  color: #00d8ff;
   opacity: .4;
 }
 
-.listSelectedOpacity {
+.single-list.selected {
   opacity: 1;
 }
+
+.single-list-touch-area {
+  width: 75%;
+  display: flex;
+  pointer-events: auto;
+}
+
+.single-list-touch-area.editing {
+  pointer-events: none;
+}
+
+.single-list-icons {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-list-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.single-list-texts-area {
+  width: 80%; 
+  height: 100%;
+}
+
+.single-list-texts {
+  width: 100%;
+  height: 65%;
+  font-size: 18px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.single-list-title {
+  word-break: break-all;
+  font-weight: bold;
+}
+
+.single-list-sub {
+  width: 100%; 
+  height: 35%; 
+  font-size: 10px;
+}
+
+.single-list-click-options {
+  width: 25%;
+  display: flex;
+  align-self: flex-end;
+}
+
+.single-list-click-option {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-list-option-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.single-list-option-icon-text {
+  font-size: 8px;
+}
+
+.title-editing-window {
+  width: 80%;
+  height: 100%;
+  background-color: rgba(34, 34, 34, .8);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-editing-window.show {
+  animation-name: edit-modal-show;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.title-editing-window.hidden {
+  animation-name: edit-modal-hidden;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
 /* --- Switch List Modal(ends here) --- */
+
+/* --- Filter Todo Modal(starts here) --- */
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(34, 34, 34, .5);
+  z-index: 4;
+}
+
+.show {
+  animation-name: filter-modal-show;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+}
+
+.hidden {
+  animation-name: filter-modal-hidden;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+}
+
+.filter-window-slide-down {
+  width: 100%;
+  background-color: #222;
+  border-bottom: .5px solid #00d8ff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 5;
+  padding-top: 25px;
+
+  animation-name: filter-slide-down;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+}
+
+.filter-window-slide-up {
+  animation-name: filter-slide-up;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
+}
+
+.filter-window-blank-space {
+  width: 100%; 
+  height: 80%;
+  position: relative;
+}
+
+.filter-option {
+  width: 25%;
+  aspect-ratio: 1/1;
+  margin-bottom: 25px;
+  color: #00d8ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+.filter-option:disabled {
+  opacity: .2;
+  border: 1px solid #00d8ff;
+}
+
+.filter-option-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.filter-option-text {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.filter-window-clode-btn {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: #00d8ff;
+}
+/* --- Filter Todo Modal(ends here) --- */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -389,6 +726,7 @@ option {
   }
 }
 
+/* --- Switch List Modal keyframes(starts here) --- */
 @keyframes slide-right {
   0% {
     transform: translateX(-100%);
@@ -410,3 +748,61 @@ option {
     opacity: 0;
   }
 }
+
+@keyframes edit-modal-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes edit-modal-hidden {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* --- Switch List Modal keyframes(ends here) --- */
+
+/* --- filter modal keyframes(starts here) --- */
+
+@keyframes filter-modal-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes filter-modal-hidden {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes filter-slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes filter-slide-up {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+/* --- filter modal keyframes(ends here) --- */

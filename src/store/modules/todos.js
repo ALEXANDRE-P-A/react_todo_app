@@ -11,6 +11,14 @@ const todoSlice = createSlice({
     addList(state, action){
       state.lists = [ action.payload, ...state.lists ]
     },
+    editList(state, action){
+      const now = moment().format("YYYY/MM/DD hh:mm:ss a");
+      state.lists = state.lists.map(list => {
+        return list.id === action.payload.id ?
+        { ...list, title: action.payload.title, updated: now } :
+        { ...list };
+      });
+    },
     importList(state, action){
       state.lists = [ action.payload, ...state.lists ]
     },
@@ -18,9 +26,11 @@ const todoSlice = createSlice({
       state.lists = state.lists.filter(list => list.id !== action.payload);
     },
     add(state, action){
+      const now = moment().format("YYYY/MM/DD hh:mm:ss a");
       for(let list of state.lists){
         if(list.title === action.payload.list){
           list.items = [ ...list.items, action.payload ];
+          list.updated = now;
         }
       }
     },
@@ -45,6 +55,7 @@ const todoSlice = createSlice({
               )
             }
           });
+          list.updated = now;
         }
       }
     },
@@ -56,14 +67,17 @@ const todoSlice = createSlice({
             return item.id === action.payload.todo ?
             { ...item, title: action.payload.title, content: action.payload.content, updated: now } :
             { ...item }
-          })
+          });
+          list.updated = now;
         }
       }
     },
     deleteTodo(state, action){
+      const now = moment().format("YYYY/MM/DD hh:mm:ss a");
       for(let list of state.lists){
         if(list.id === action.payload.list){
           list.items = list.items.filter(item => item.id !== action.payload.todo);
+          list.updated = now;
         }
       }
     },
@@ -78,6 +92,7 @@ const todoSlice = createSlice({
 
 export const {
    addList,
+   editList,
    importList,
    deleteList,
    add,

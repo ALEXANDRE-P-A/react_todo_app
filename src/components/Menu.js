@@ -32,6 +32,7 @@ export const Menu = _ => {
       todos = list.items;
     }
   }
+
   const clearListHandler = _ => {
     const confirmation = window.confirm("Are you sure clear the list ?");
     if(confirmation)
@@ -39,7 +40,8 @@ export const Menu = _ => {
   };
 
   const importListHandler = async e => {
-    if(!e.target.files || e.target.files.length === 0)
+
+    if(!e.target.files || e.target.files.length === 0 || e.target.files[0].name.split(".")[1] !== "rta")
       return;
 
     const file = e.target.files[0];
@@ -69,10 +71,16 @@ export const Menu = _ => {
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
-        link.download = "list.json";
+        link.download = "list.rta";
         link.click();
       }
     }
+  };
+
+  const ListLength = _ => {
+    
+    if(lists.length !== 0)
+      return <strong>({ lists.length })</strong>
   };
 
   return (
@@ -83,7 +91,7 @@ export const Menu = _ => {
         onClick={ _ => setSwitchList(true) }
       >
         <CgPlayListSearch  className="menuIcon"  />
-        <span className="menuText">switch list</span>
+        <span className="menuText">switch list<ListLength /></span>
       </button>
       <div
         style={{
@@ -93,7 +101,7 @@ export const Menu = _ => {
         <input
           type="file"
           id="importFile"
-          accept=".json"
+          accept=".rta"
           style={{
             position: "absolute",
             width: "100%",
