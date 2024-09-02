@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 import { useCurrentListId } from "../context/CurrentListContext";
+import { useAlert } from "../context/AlertContext";
 
 export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
 
@@ -25,6 +26,7 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
   const [ content, setContent ] = useState(todo.content);
 
   const [ currentListId ] = useCurrentListId();
+  const [ ,setAlertContent ] = useAlert();
 
   const closeModalHandler = _ => {
     document.querySelector(".modal-slide-down").classList.add("modal-slide-up");
@@ -39,7 +41,8 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
     if(confirmation){
       dispatch(complete({ list: currentListId, todo: todo.id, flag: todo.flag }));
       closeModalHandler();
-    }  
+    }
+    setAlertContent({ trigger: true, flag: 0, type: "item", content: title, action: "updat" });
   };
 
   const editHandler = e => {
@@ -51,6 +54,7 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
       content: content 
     }));
     switchEdit(false);
+    setAlertContent({ trigger: true, flag: 0, type: "item", content: title, action: "updat" });
   };
 
   const editCancelHandler = _ => {
@@ -64,6 +68,7 @@ export const ItemDetailsModal = ({ todo, setItemDetailsModal }) => {
     if(confirmation){
       dispatch(deleteTodo({ list: currentListId, todo: todo.id }));
       closeModalHandler();
+      setAlertContent({ trigger: true, flag: 0, type: "item", content: title, action: "delet" });
     }
   };
 

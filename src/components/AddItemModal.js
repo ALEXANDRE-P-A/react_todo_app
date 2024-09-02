@@ -14,16 +14,16 @@ import { add } from "../store/modules/todos";
 import { useAddItemModal } from "../context/ModalContext";
 
 import { useCurrentList } from "../context/CurrentListContext";  
+import { useAlert } from "../context/AlertContext";
 
 export const AddItemModal = _ => {
-
-  console.log("AddItemModal render ...");
 
   const [ title, setTitle ] = useState("");
   const [ content, setContent ] = useState("");
 
   const [ ,setAddItemModel ] = useAddItemModal();
   const [ currentList ] = useCurrentList();
+  const [ ,setAlertContent ] = useAlert();
 
   const dispatch = useDispatch();
 
@@ -54,6 +54,7 @@ export const AddItemModal = _ => {
       };
       dispatch(add(newTodo));
       closeModalHandler();
+      setAlertContent({ trigger: true, flag: 0, type: "item", content: newTodo.title, action: "add" });
     }    
   };
 

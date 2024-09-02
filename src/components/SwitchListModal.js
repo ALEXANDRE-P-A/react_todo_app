@@ -13,6 +13,7 @@ import { MdCancel } from "react-icons/md";
 import { useSwitchListModal } from "../context/ModalContext";
 import { useCurrentList, useCurrentListId } from "../context/CurrentListContext";
 import { useFilterTodo } from "../context/FilterTodoContext";
+import { useAlert } from "../context/AlertContext";
 
 import { useSelector, useDispatch } from "react-redux";
 import { addList, editList, deleteList } from "../store/modules/todos";
@@ -29,6 +30,7 @@ export const SwitchListModal = _ => {
   const [ ,setCurrentList ] = useCurrentList();
   const [ currentListId, setCurrentListId ] = useCurrentListId();
   const [ ,setFilterTodo ] = useFilterTodo();
+  const [ ,setAlertContent ] = useAlert();
 
   const lists = useSelector(state => state.todos.lists);
 
@@ -77,6 +79,7 @@ export const SwitchListModal = _ => {
       setCurrentListId(newList.id);
       setCurrentList(newList.title);
       dispatch(addList(newList));
+      setAlertContent({ trigger: true, flag: 0, type: "list", content: newList.title, action: "add" });
     }
   };
 
@@ -86,6 +89,7 @@ export const SwitchListModal = _ => {
       setCurrentList("");
       dispatch(deleteList(listId));
     }
+    setAlertContent({ trigger: true, flag: 0, type: "list", content: listTitle, action: "delete" });
   };
 
   const editingCloseHandler = _ => {
@@ -101,6 +105,7 @@ export const SwitchListModal = _ => {
     setCurrentList(editingTitle);
     dispatch(editList({ id: titleEditMode.id, title: editingTitle }));
     editingCloseHandler();
+    setAlertContent({ trigger: true, flag: 0, type: "list", content: editingTitle, action: "edit" });
   };
 
   const editListTitleHandler = (id, title, flag) => {
@@ -168,7 +173,7 @@ export const SwitchListModal = _ => {
         <div className="switchModalBtnArea">
           <button 
             type="button"
-            className="switchModalBtn"
+            className="switchModalBtn add-new-list-btn"
             onClick={ addListInputHandler }
             disabled={ btnDisable }
           >

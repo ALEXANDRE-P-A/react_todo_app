@@ -12,6 +12,7 @@
   z-index: 1;
   scrollbar-color: #222 #00d8ff;
   scrollbar-width: none;
+  position: relative;
 }
 
 .App-logo {
@@ -21,6 +22,29 @@
   position: fixed;
   top: 30%;
   bottom: auto;
+  margin-top: -50px;
+}
+
+.app-back-title {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.app-back-title-text {
+  color: #61dafb;
+  opacity: .1;
+  font-weight: bold;
+  margin-top: 90px;
+  font-size: 1.6em;
 }
 
 /* ---  Menu(starts here) --- */
@@ -50,9 +74,33 @@
   color: #00d8ff;
 }
 
+.menuBtn.list {
+  position: relative;
+}
+
+.list-import-btn-div {
+  position: relative;
+}
+
+.list-import-btn-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
 .menuBtn-icon {
   width: 18px;
   height: 18px;
+}
+
+.menu-btn-list-length {
+  position: absolute;
+  bottom: -15px;
+  padding: 1px 4px;
+  /* background-color: #00d8ff; */
+  /* border-radius: 50%; */
+  color: #00d8ff;
 }
 
 .menuBtn:disabled {
@@ -72,6 +120,11 @@
   font-size: 12px;
 }
 
+.menuIcon.serach-list {
+  width: 40px; 
+  height: 40px;
+}
+
 .menuText.icon {
   font-size: 6px;
 }
@@ -80,7 +133,6 @@
 /* --- Main content(starts here) --- */
 .container {
   width: 100%;
-  background-color: #282c34;
   position: relative;
   top: 0;
   left: 0;
@@ -177,7 +229,11 @@
 }
 
 .empty-case-btn-text.lists {
-  width: 60%;
+  width: 80px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .empty-case-btn-text.items {
@@ -223,7 +279,7 @@
 }
 
 .completed {
-  opacity: .2;
+  opacity: .5;
 }
 
 .contentBox {
@@ -494,7 +550,7 @@ option {
   display: flex;
   justify-content: space-between;
   color: #00d8ff;
-  opacity: .4;
+  opacity: .5;
 }
 
 .single-list.selected {
@@ -661,7 +717,7 @@ option {
 }
 
 .filter-option:disabled {
-  opacity: .2;
+  opacity: .5;
   border: 1px solid #00d8ff;
 }
 
@@ -684,6 +740,91 @@ option {
   color: #00d8ff;
 }
 /* --- Filter Todo Modal(ends here) --- */
+
+/* --- Alert Messages(starts here) --- */
+.alert-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(34, 34, 34, .3);
+  z-index: 6;
+}
+
+.alert-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 6;
+}
+
+.alert-container.show {
+  animation-name: alert-msgs-show;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.alert-container.hidden {
+  animation-name: alert-msgs-hidden;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.alert-box {
+  width: 80%;
+  padding: 10px; 
+  color: #222;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(0, 216, 255);
+}
+
+.alert-box.success { background-color: rgb(0, 255, 34); }
+.alert-box.info { background-color: rgb(0, 216, 255); }
+.alert-box.warning { background-color: rgb(255, 255, 0); }
+.alert-box.error { background-color: rgb(255, 0, 0); color: #fff }
+
+.alert-severity-box {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-severity-icon {
+  width: 21px;
+  height: 21px;
+}
+
+.alert-msg-box {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 15px;
+  font-size: .7em;
+}
+
+.alert-msg-content {
+  max-width: 220px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;  
+  -webkit-box-orient:vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.alert-close-btn {
+  width: 20px;
+  height: 20px;
+}
+/* --- Alert Messages(ends here) --- */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -806,3 +947,27 @@ option {
   }
 }
 /* --- filter modal keyframes(ends here) --- */
+
+/* --- Alert Messages keyframe(starts here) --- */
+@keyframes alert-msgs-show {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes alert-msgs-hidden {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+/* --- Alert Messages keyframe(ends here) --- */

@@ -2,7 +2,7 @@ import "../App.css";
 import logo from '../logo.svg';
 
 import { MdAdd } from "react-icons/md";
-import { MdPlaylistAdd  } from "react-icons/md";
+import { MdFormatListBulletedAdd, MdFormatListBulleted } from "react-icons/md";
 
 import { useSelector } from "react-redux";
 
@@ -13,12 +13,29 @@ import { useCurrentList } from "../context/CurrentListContext.js";
 
 const InsideContent = ({ title, listsLength, items, setAddItemModel, setSwitchListModal }) => {
 
-  if(title.length === 0){
+  const addNewListBtnAction = _ => {
+    setSwitchListModal(true);
+    setTimeout(_ => {
+      const addListBtn = document.querySelector(".add-new-list-btn");
+      addListBtn.click();
+    }, 300);    
+  };
+
+  if(listsLength === 0){
+    return (
+      <div className="emptyCase">
+        <button type="button" className="menuBtn empty-case-btn" onClick={ addNewListBtnAction }>
+          <MdFormatListBulletedAdd  className="menuIcon empty-case-btn-icon" />
+          <span className="menuText empty-case-btn-text lists">add list</span>
+        </button>
+      </div>
+    )
+  } else if(title.length === 0){
     return (
       <div className="emptyCase">
         <button type="button" className="menuBtn empty-case-btn" onClick={ _ => setSwitchListModal(true) }>
-          <MdPlaylistAdd className="menuIcon empty-case-btn-icon" />
-          <span className="menuText empty-case-btn-text lists">lists({ listsLength || "0" })</span>
+          <MdFormatListBulleted className="menuIcon empty-case-btn-icon serach-list" />
+          <span className="menuText empty-case-btn-text lists">search list({ listsLength || "0" })</span>
         </button>
       </div>
     )
@@ -39,15 +56,13 @@ const InsideContent = ({ title, listsLength, items, setAddItemModel, setSwitchLi
 };
 
 export const Container = _ => {
-
-  console.log("Container render ...")
-
+  
   const [ ,setAddItemModel ] = useAddItemModal();
   const [ ,setSwitchListModal ] = useSwitchListModal(false);
   const [ currentList ] = useCurrentList();
 
   let todos;
-  let listsLength;
+  let listsLength = 0;
   const lists = useSelector(state => state.todos.lists);
 
   for(let list of lists){
@@ -59,7 +74,7 @@ export const Container = _ => {
   
   return (
     <div className='container'>
-      <img src={logo} className="App-logo" alt="logo" />
+      <img src={ logo } className="App-logo" alt="logo" />
       <InsideContent 
         title={ currentList }
         listsLength={ listsLength }

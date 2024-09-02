@@ -19,8 +19,8 @@ const todoSlice = createSlice({
         { ...list };
       });
     },
-    importList(state, action){
-      state.lists = [ action.payload, ...state.lists ]
+    importList(state, action){      
+      state.lists = [ action.payload, ...state.lists ];
     },
     deleteList(state, action){
       state.lists = state.lists.filter(list => list.id !== action.payload);

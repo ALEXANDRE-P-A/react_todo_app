@@ -32,7 +32,7 @@ export const ListTitle = _ => {
     return (
       <div className="listHeader">
         <div className="listHeaderTitle">
-          <span className="listTitle">{ currentList }({ itemNums || "0" })</span>
+          <span className="listTitle">{ currentList }</span>
           {
             Boolean(itemNums) && (
               <div className={ iconBoxStyle }>
